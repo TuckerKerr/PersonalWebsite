@@ -5,4 +5,13 @@
     display: flex;
     width: 100%;
     background-color: white;
+    height: 50px;
+    font-size: 25px;
+    font-weight: bold;
+}
+.left-hug{
+
+}
+.right-hug{
+    
 }
