@@ -228,11 +228,26 @@ html{
     width: 40px;
     height: 40px;
 }
-.project-text{
+.project-container{
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
     width: 100%;
+    background-color: #EDE0D4;
+    align-items: center;
+    position: relative;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow:
+    4px 0 black,    /* right */
+    -4px 0 black,   /* left */
+    0 4px black,    /* bottom */
+    0 -4px black;   /* top */
+}
+.project-text{
+     display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
     background-color: #EDE0D4;
     align-items: center;
     position: relative;
