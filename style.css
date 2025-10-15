@@ -245,8 +245,8 @@ html{
     0 -4px black;   /* top */
 }
 .project-text{
-     display: flex;
-    flex-direction: row-reverse;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     background-color: #EDE0D4;
     align-items: center;
