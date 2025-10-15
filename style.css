@@ -6,9 +6,8 @@ html{
 }
 .topnav{
     display: flex;
-    width: 70%;
+    width: 100%;
     position: relative;
-    left: 15%;
     background-color: #ffecd1;
     height: 50px;
     font-size: 25px;
