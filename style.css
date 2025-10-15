@@ -1,17 +1,22 @@
 :root{
-  background-color: #333;  
+  background-color: #ffecd1;  
 }
 .topnav{
     display: flex;
-    width: 100%;
-    background-color: white;
+    width: 70%;
+    position: relative;
+    left: 15%;
+    background-color: #ffecd1;
     height: 50px;
     font-size: 25px;
     font-weight: bold;
+    justify-content: space-between;
 }
 .left-hug{
-
+    display: flex;
+    align-items: center;
 }
 .right-hug{
-    
+    display: flex;
+    align-items: center;
 }
