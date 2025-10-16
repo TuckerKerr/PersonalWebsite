@@ -7,12 +7,14 @@ html{
 .topnav{
     display: flex;
     width: 100%;
-    position: relative;
+    position: sticky;
     background-color: #ffecd1;
     height: 50px;
     font-size: 25px;
     font-weight: bold;
     justify-content: space-between;
+    top: 0;
+    border-radius: 10px;
 }
 .left-hug{
     display: flex;
