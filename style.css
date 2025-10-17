@@ -239,3 +239,7 @@ html{
   transition: 0.2s;
   margin-top: 15px;
 }
+
+body.modal-open{
+  overflow: hidden;
+}

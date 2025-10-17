@@ -1,0 +1,710 @@
+{
+  "Desktops": {
+    "1": {
+      "asset_id": 4,
+      "assigned_to": "Tucker",
+      "date": "2025-09-02",
+      "category": "Desktops",
+      "quantity": 23,
+      "model": "OptiPlex SFF 7010",
+      "campus": "Downcity"
+    },
+    "2": {
+      "asset_id": 15,
+      "assigned_to": "Tucker",
+      "date": "2025-09-02",
+      "category": "Desktops",
+      "quantity": 2,
+      "model": "Precision 3260",
+      "campus": "Downcity"
+    },
+    "3": {
+      "asset_id": 17,
+      "assigned_to": "Tucker",
+      "date": "2025-09-02",
+      "category": "Desktops",
+      "quantity": 1,
+      "model": "OptiPlex SFF 5000",
+      "campus": "Downcity"
+    },
+    "4": {
+      "asset_id": 19,
+      "assigned_to": "Tucker",
+      "date": "2025-09-02",
+      "category": "Desktops",
+      "quantity": 6,
+      "model": "OptiPlex 7410 AIO",
+      "campus": "Downcity"
+    },
+    "7": {
+      "asset_id": 89,
+      "assigned_to": "Tucker",
+      "date": "2025-09-18",
+      "category": "Desktops",
+      "quantity": 15,
+      "model": "Dell Pro Slim",
+      "campus": "Downcity"
+    },
+    "8": {
+      "asset_id": 146,
+      "assigned_to": "Tucker",
+      "date": "2025-09-18",
+      "category": "Desktops",
+      "quantity": 3,
+      "model": "Dell Pro 24 AIO",
+      "campus": "Downcity"
+    },
+    "9": {
+      "asset_id": 128,
+      "assigned_to": "test",
+      "date": "2025-09-29",
+      "category": "Desktops",
+      "quantity": 0,
+      "model": "Mac A2438 (2021)",
+      "campus": "Downcity"
+    }
+  },
+  "AV": {
+    "4": {
+      "asset_id": 4,
+      "assigned_id": 349,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 4,
+      "model": "Panasonic VMZ51",
+      "campus": "Downcity"
+    },
+    "5": {
+      "asset_id": 5,
+      "assigned_id": 352,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 1,
+      "model": "Panasonic VMZ60",
+      "campus": "Downcity"
+    },
+    "6": {
+      "asset_id": 6,
+      "assigned_id": 355,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 7,
+      "model": "Panasonic VMZ61",
+      "campus": "Downcity"
+    },
+    "7": {
+      "asset_id": 7,
+      "assigned_id": 433,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 3,
+      "model": "Panasonic VMZ62",
+      "campus": "Downcity"
+    },
+    "8": {
+      "asset_id": 8,
+      "assigned_id": 434,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 15,
+      "model": "Crestron PS401",
+      "campus": "Downcity"
+    },
+    "9": {
+      "asset_id": 9,
+      "assigned_id": 442,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 14,
+      "model": "Crestron TSW770",
+      "campus": "Downcity"
+    },
+    "10": {
+      "asset_id": 10,
+      "assigned_id": 493,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 1,
+      "model": "Crestron AMP x50",
+      "campus": "Downcity"
+    },
+    "11": {
+      "asset_id": 11,
+      "assigned_id": 494,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 11,
+      "model": "Crestron AMP x75",
+      "campus": "Downcity"
+    },
+    "12": {
+      "asset_id": 12,
+      "assigned_id": 495,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 11,
+      "model": "Crestron OC Sensors",
+      "campus": "Downcity"
+    },
+    "13": {
+      "asset_id": 13,
+      "assigned_id": 496,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 14,
+      "model": "Chief Projector Mounts RPAUW",
+      "campus": "Downcity"
+    },
+    "15": {
+      "asset_id": 15,
+      "assigned_id": 497,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 7,
+      "model": "TV Cart Stands (SR575M)",
+      "campus": "Downcity"
+    },
+    "16": {
+      "asset_id": 16,
+      "assigned_id": 498,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 4,
+      "model": "Samsung TV BE75D",
+      "campus": "Downcity"
+    },
+    "17": {
+      "asset_id": 17,
+      "assigned_id": 499,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 5,
+      "model": "Samsung TV BE65D",
+      "campus": "Downcity"
+    },
+    "18": {
+      "asset_id": 18,
+      "assigned_id": 500,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 5,
+      "model": "Samsung TV HG50C",
+      "campus": "Downcity"
+    },
+    "19": {
+      "asset_id": 19,
+      "assigned_id": 501,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 4,
+      "model": "Samsung TV BE55D",
+      "campus": "Downcity"
+    },
+    "20": {
+      "asset_id": 20,
+      "assigned_id": 502,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 1,
+      "model": "Crestron PS402",
+      "campus": "Downcity"
+    },
+    "21": {
+      "asset_id": 21,
+      "assigned_id": 503,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 1,
+      "model": "Samsung TV LH65Q",
+      "campus": "Downcity"
+    },
+    "22": {
+      "asset_id": 22,
+      "assigned_id": 504,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 1,
+      "model": "Samsung TV LH48D",
+      "campus": "Downcity"
+    },
+    "23": {
+      "asset_id": 23,
+      "assigned_id": 505,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 1,
+      "model": "Samsung TV LH75Q",
+      "campus": "Downcity"
+    },
+    "24": {
+      "asset_id": 24,
+      "assigned_id": 506,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 1,
+      "model": "Samsung TV LH65D",
+      "campus": "Downcity"
+    },
+    "25": {
+      "asset_id": 25,
+      "assigned_id": 507,
+      "assigned_to": "tony",
+      "date": "2025-10-03",
+      "category": "AV",
+      "quantity": 3,
+      "model": "Crestron DMPS3S-300-C",
+      "campus": "Downcity"
+    }
+  },
+  "Laptops": {
+    "5": {
+      "asset_id": 5,
+      "assigned_id": 87,
+      "assigned_to": "Tucker",
+      "date": "2025-09-02",
+      "category": "Laptops",
+      "quantity": 2,
+      "model": "Latitude 5430",
+      "campus": "Downcity"
+    },
+    "7": {
+      "asset_id": 7,
+      "assigned_id": 136,
+      "assigned_to": "Tucker",
+      "date": "2025-09-02",
+      "category": "Laptops",
+      "quantity": 7,
+      "model": "Dell Pro 14 Plus",
+      "campus": "Downcity"
+    },
+    "8": {
+      "asset_id": 8,
+      "assigned_id": 143,
+      "assigned_to": "Tucker",
+      "date": "2025-09-02",
+      "category": "Laptops",
+      "quantity": 205,
+      "model": "Dell Pro 14",
+      "campus": "Downcity"
+    },
+    "16": {
+      "asset_id": 16,
+      "assigned_id": 353,
+      "assigned_to": "Tucker",
+      "date": "2025-09-25",
+      "category": "Laptops",
+      "quantity": 3,
+      "model": "Latitude 3420",
+      "campus": "Downcity"
+    }
+  },
+  "Monitors": {
+  "12": {
+    "asset_id": 12,
+    "assigned_id": 351,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Monitors",
+    "quantity": 27,
+    "model": "P2425HE",
+    "campus": "Downcity"
+  },
+  "13": {
+    "asset_id": 13,
+    "assigned_id": 435,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Monitors",
+    "quantity": 31,
+    "model": "P2422HE",
+    "campus": "Downcity"
+  },
+  "14": {
+    "asset_id": 14,
+    "assigned_id": 440,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Monitors",
+    "quantity": 24,
+    "model": "P2424HT",
+    "campus": "Downcity"
+  },
+  "16": {
+    "asset_id": 16,
+    "assigned_id": 484,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Monitors",
+    "quantity": 35,
+    "model": "P2424HEB",
+    "campus": "Downcity"
+  },
+  "17": {
+    "asset_id": 17,
+    "assigned_id": 485,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Monitors",
+    "quantity": 28,
+    "model": "P2425H",
+    "campus": "Downcity"
+  },
+  "20": {
+    "asset_id": 20,
+    "assigned_id": 486,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Monitors",
+    "quantity": 1,
+    "model": "P2418HZM",
+    "campus": "Downcity"
+  },
+  "22": {
+    "asset_id": 22,
+    "assigned_id": 489,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Monitors",
+    "quantity": 8,
+    "model": "P202m",
+    "campus": "Downcity"
+  },
+  "23": {
+    "asset_id": 23,
+    "assigned_id": 296,
+    "assigned_to": "Tucker",
+    "date": "2025-09-30",
+    "category": "Monitors",
+    "quantity": 30,
+    "model": "P2518HT",
+    "campus": "Downcity"
+  }
+},
+"Peripherals": {
+  "33": {
+    "asset_id": 33,
+    "assigned_id": 11,
+    "assigned_to": "Tucker",
+    "date": "2025-02-19",
+    "category": "Peripherals",
+    "quantity": 18,
+    "model": "Keyboards",
+    "campus": "Downcity"
+  },
+  "34": {
+    "asset_id": 34,
+    "assigned_id": 208,
+    "assigned_to": "Tucker",
+    "date": "2025-02-19",
+    "category": "Peripherals",
+    "quantity": 45,
+    "model": "Mice",
+    "campus": "Downcity"
+  },
+  "35": {
+    "asset_id": 35,
+    "assigned_id": 209,
+    "assigned_to": "Tucker",
+    "date": "2025-02-19",
+    "category": "Peripherals",
+    "quantity": 5,
+    "model": "M&K Sets",
+    "campus": "Downcity"
+  },
+  "36": {
+    "asset_id": 36,
+    "assigned_id": 211,
+    "assigned_to": "Tucker",
+    "date": "2025-02-19",
+    "category": "Peripherals",
+    "quantity": 20,
+    "model": "Headsets",
+    "campus": "Downcity"
+  },
+  "37": {
+    "asset_id": 37,
+    "assigned_id": 243,
+    "assigned_to": "Tucker",
+    "date": "2025-02-19",
+    "category": "Peripherals",
+    "quantity": 24,
+    "model": "Cameras",
+    "campus": "Downcity"
+  },
+  "53": {
+    "asset_id": 53,
+    "assigned_id": 8,
+    "assigned_to": "Tucker",
+    "date": "2025-04-04",
+    "category": "Peripherals",
+    "quantity": 70,
+    "model": "Dell 65W USB-C Chargers",
+    "campus": "Downcity"
+  }
+},
+"Printers": {
+  "1": {
+    "asset_id": 1,
+    "assigned_id": 490,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Printers",
+    "quantity": 6,
+    "model": "X654",
+    "campus": "Downcity"
+  },
+  "2": {
+    "asset_id": 2,
+    "assigned_id": 491,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Printers",
+    "quantity": 19,
+    "model": "X579",
+    "campus": "Downcity"
+  },
+  "3": {
+    "asset_id": 3,
+    "assigned_id": 492,
+    "assigned_to": "Tucker",
+    "date": "2025-09-18",
+    "category": "Printers",
+    "quantity": 1,
+    "model": "E575",
+    "campus": "Downcity"
+  }
+},
+  "Toner": {
+    "2": {
+      "asset_id": 2,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE264XC",
+      "models": "CM4540 MFP",
+      "color": "Black",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    },
+    "3": {
+      "asset_id": 3,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE265A",
+      "models": "?",
+      "color": "Black",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    },
+    "4": {
+      "asset_id": 4,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE265A",
+      "models": "?",
+      "color": "Black",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    },
+    "5": {
+      "asset_id": 5,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE252YC",
+      "models": "CP3525, CM3530 MFP",
+      "color": "Yellow",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    },
+    "6": {
+      "asset_id": 6,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE251YC",
+      "models": "CP3525, CM3530",
+      "color": "Cyan",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    },
+    "7": {
+      "asset_id": 7,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE510XC",
+      "models": "300, M351, M375, 400, M451, M475",
+      "color": "Black",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    },
+    "8": {
+      "asset_id": 8,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE410XC",
+      "models": "300, M351, M375, 400, M451, M475",
+      "color": "Black",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    },
+    "9": {
+      "asset_id": 9,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE250YC",
+      "models": "CP3525, CM3530",
+      "color": "Black",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    },
+    "10": {
+      "asset_id": 10,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE264XC",
+      "models": "CM4540 MFP",
+      "color": "Black",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    },
+    "11": {
+      "asset_id": 11,
+      "assigned_to": "Tucker",
+      "expiration_date": "2025-09-08",
+      "type": "Toner",
+      "quantity": 1,
+      "part_number": "CE270AC",
+      "models": "CP5525",
+      "color": "Black",
+      "storage_location": "CE/Q/W/Canon: Toner Closet"
+    }
+  },
+  "OpenEQ": {
+  "1": {
+    "asset_id": 1,
+    "assigned_id": 23521,
+    "category": "Laptops",
+    "model": "Latitude 3420",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Tucker"
+  },
+  "4": {
+    "asset_id": 4,
+    "assigned_id": 31988,
+    "category": "Laptops",
+    "model": "Latitude 3420",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  },
+  "5": {
+    "asset_id": 5,
+    "assigned_id": 23525,
+    "category": "Laptops",
+    "model": "Latitude 3420",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  },
+  "6": {
+    "asset_id": 6,
+    "assigned_id": 23496,
+    "category": "Laptops",
+    "model": "Latitude 3420",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  },
+  "7": {
+    "asset_id": 7,
+    "assigned_id": 23164,
+    "category": "Laptops",
+    "model": "Latitude 3420",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  },
+  "8": {
+    "asset_id": 8,
+    "assigned_id": 23995,
+    "category": "Laptops",
+    "model": "Latitude 3420",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  },
+  "9": {
+    "asset_id": 9,
+    "assigned_id": 23564,
+    "category": "Laptops",
+    "model": "Latitude 5430",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  },
+  "11": {
+    "asset_id": 11,
+    "assigned_id": 31685,
+    "category": "Laptops",
+    "model": "Latitude 5430",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  },
+  "12": {
+    "asset_id": 12,
+    "assigned_id": 23576,
+    "category": "Laptops",
+    "model": "Latitude 3420",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  },
+  "13": {
+    "asset_id": 13,
+    "assigned_id": 23157,
+    "category": "Laptops",
+    "model": "Latitude 3420",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  },
+  "14": {
+    "asset_id": 14,
+    "assigned_id": 24126,
+    "category": "Laptops",
+    "model": "Latitude 3420",
+    "location": "Work Bench",
+    "campus": "Downcity",
+    "assigned_to": "Kevin"
+  }
+}
+}
