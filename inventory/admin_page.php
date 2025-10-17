@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap%27">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="prefetch" href="main.php">
+    <link rel="prefetch" href="index.php">
     <link rel="stylesheet" href="style.css">
 
     <script>
@@ -110,7 +110,7 @@
                     <div class="username">
                         <h2>Menu</h2>
                     </div>
-                    <a href="main.php" class="dropdown-item">Main Page<i class="fa-solid fa-bars"></i></a>
+                    <a href="index.php" class="dropdown-item">Main Page<i class="fa-solid fa-bars"></i></a>
                     <a onclick="showModelAdd()" class="dropdown-item">Add Model <i class="fa-solid fa-gear"></i></a>
                     <div class="theme-toggle">
                         <span>DC</span>

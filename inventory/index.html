@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <title>Inventory Management</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap%27">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="prefetch" href="main.php">
+    <link rel="stylesheet" href="style.css">
+
+    <script>
+        /*
+    document.addEventListener('DOMContentLoaded', function(){
+
+    // Check if the user is logged in
+    
+    if (sessionStorage.getItem('isLoggedIn') !== 'true') {
+    window.location.href = 'index.html'; // Redirect to login page if not logged in
+    } else {
+        const username = sessionStorage.getItem('userName');
+        const admin = sessionStorage.getItem('is_staff');
+        
+        if (username) {
+            const capitalizedUsername = username.charAt(0).toUpperCase() + username.slice(1);
+            document.getElementById('usernameDisplay').textContent = capitalizedUsername;
+            //const firstLetter = username.charAt(0).toUpperCase();
+            //document.getElementById('profileIcon').textContent = firstLetter;
+            //console.log(firstLetter);
+        }
+
+        // Check if the user is staff and hide/show the button
+        const staffButton = document.getElementById('menu'); // Get the button by its ID
+        if (staffButton) {
+            if (admin === 'true') {
+                staffButton.style.display = 'block'; // Show the button if the user is staff
+            } else {
+                staffButton.style.display = 'none'; // Hide the button if the user is not staff
+            }
+        } else {
+            console.log("staffButton element not found");
+        }
+ 
+
+    }
+    });
+    */
+
+    document.addEventListener('DOMContentLoaded', function(){
+        TableLoader();
+        document.body.classList.add('modal-open');
+    });
+
+    let idleTime = 0;
+    let refreshTime = 0;
+    let idleLimit = 2 * 60 * 1000;
+    let refreshTables = 5 * 60 * 1000;
+    let sessionTimeout; 
+
+    const resetIdleTimer = () =>{
+        idleTimer = 0;
+    };
+    const resetRefreshTimer = () =>{
+        idleTimer = 0;
+    };
+/*
+    const trackIdleTime = () => {
+        idleTime += 1000;
+        if(idleTime >= idleLimit){
+            logout();
+        }
+    };
+*/
+
+    const trackRefreshTime = () => {
+        refreshTime += 1000;
+        if(refreshTime >= refreshTables){
+            TableLoader();
+            TonerTableLoader();
+            EQTableLoader();
+            resetRefreshTimer();
+        }
+    };
+
+    document.onmousemove = resetIdleTimer;
+    document.onkeypress = resetIdleTimer;
+    document.onclick = resetIdleTimer;
+    document.onscroll = resetIdleTimer;
+
+    setInterval(trackRefreshTime, 1000);
+    setInterval(trackIdleTime, 1000);
+
+        function logout() {
+        sessionStorage.removeItem('isLoggedIn'); // Clear login status
+
+        sessionStorage.removeItem('username'); // Clear username
+        sessionStorage.removeItem('is_staff'); // Clear username
+        window.location.href = 'index.html'; // Redirect to login page
+        }
+    </script>
+</head>
+
+<body>
+<!-- Top Navigation Bar -->
+<div class="topnav">
+        <div class="profile" id="profile">
+            <div class="profile-icon" id="profileIcon"><i class="fa-solid fa-user"></i></div>
+            <div class="dropdown" id="dropdown">
+                <div class="username">
+                    <h2 id="usernameDisplay"></h2>
+                </div>
+                <a href="../schedule/INDEX-HTML/schedule_integration.html" class="dropdown-item">Schedule <i class="fa-solid fa-calendar-days"></i></a>
+                <a href="../sts/INDEX-HTML/main.html" class="dropdown-item">STS <i class="fa-solid fa-building"></i></a>
+                <a href="#" onclick="logout()" class="dropdown-item">Sign Out <i class="fa-solid fa-right-from-bracket"></i></a>
+            </div>
+        </div>
+        <div class="menu" id="menu">
+            <div class="menu-icon" id="menuIcon"><i class="fa-solid fa-folder-open"></i></div>
+                <div class="menudropdown" id="menudropdown">
+                    <div class="username">
+                        <h2>Menu</h2>
+                    </div>
+                    <a href="admin_page.php" class="dropdown-item">Admin Page<i class="fa-solid fa-bars"></i></a>
+                    <a onclick="showModelAdd()" class="dropdown-item">Add Model <i class="fa-solid fa-gear"></i></a>
+                    <div class="theme-toggle">
+                        <span>Gray</span>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="themeToggle" onchange="loadTheme(this)">
+                            <span class="toggle-slider"></span>
+                        </label>
+                        <span>Blue</span>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+<div class="main-content">
+    <div class="title">Inventory Management</div>
+<div class="box-container">
+    <div class="box-left-column">
+            <div class="box top-box">
+                <div class="box-header">
+                    <h2>Laptops</h2>
+                </div>
+                <div class="box-content">
+                    <div class="tablewrapper">
+                   <table id="Laptopstable" border = "1">
+                    <thead>
+                        <tr>
+                            <th style="padding: 0.75rem 1rem;">Quantity</th>
+                            <th style="padding: 0.75rem 1rem;">Model</th>
+                            <th style="padding: 0.75rem 1rem;">Campus</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                   </table>
+                </div>
+            </div>
+        </div>
+            <div class="box bottom-box">
+                <div class="box-header">
+                    <h2>Desktops</h2>
+                </div>
+                <div class="box-content">
+                    <div class="tablewrapper">
+                   <table id="Desktopstable" border = "1">
+                    <thead>
+                       <tr>
+                        <th style="padding: 0.75rem 1rem;">Quantity</th>
+                        <th style="padding: 0.75rem 1rem;">Model</th>
+                        <th style="padding: 0.75rem 1rem;">Campus</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                   </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <div class="box-middle-column">
+            <div class="box top-box">
+                <div class="box-header">
+                    <h2>Monitors</h2>
+                </div>
+                <div class="box-content">
+                    <div class="tablewrapper">
+                   <table id="Monitorstable" border = "1">
+                    <thead>
+                        <tr>
+                            <th style="padding: 0.75rem 1rem;">Quantity</th>
+                            <th style="padding: 0.75rem 1rem;">Model</th>
+                            <th style="padding: 0.75rem 1rem;">Campus</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                   </table>
+                </div>
+            </div>
+        </div>
+
+            <div class="box bottom-box">
+                <div class="box-header">
+                    <h2>Peripherals</h2>
+                </div>
+                <div class="box-content">
+                    <div class="tablewrapper">
+                   <table id="Peripheralstable" border = "1">
+                    <thead>
+                        <tr>
+                            <th style="padding: 0.75rem 1rem;">Quantity</th>
+                            <th style="padding: 0.75rem 1rem;">Model</th>
+                            <th style="padding: 0.75rem 1rem;">Campus</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                   </table>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="box-right-column">
+            <div class="box top-box">
+                <div class="box-header">
+                    <h2>Printers</h2>
+                </div>
+                <div class="box-content">
+                    <div class="tablewrapper">
+                   <table id="Printerstable" border = "1">
+                    <thead>
+                        <tr>
+                            <th style="padding: 0.75rem 1rem;">Quantity</th>
+                            <th style="padding: 0.75rem 1rem;">Model</th>
+                            <th style="padding: 0.75rem 1rem;">Campus</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                   </table>
+                </div>
+            </div>
+            </div>
+
+            <div class="box bottom-box">
+                <div class="box-header">
+                    <h2>AV</h2>
+                </div>
+                <div class="box-content">
+                    <div class="tablewrapper">
+                   <table id="AVtable" border = "1">
+                    <thead>
+                        <tr>
+                            <th style="padding: 0.75rem 1rem;">Quantity</th>
+                            <th style="padding: 0.75rem 1rem;">Model</th>
+                            <th style="padding: 0.75rem 1rem;">Campus</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                   </table>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div id="IntroPopup" class="popup" style="display: flex;">
+            <div class="popup-content" style="width: 200px;">
+                <button class="close-popup" id="closeIntro" onclick="closeButtonIntro()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>Info</h2>
+                <p>This website is a testing ground for you to see how the website feels and to see how it would visually look, i am currently working on making it function using json so you can see how the website moves.</p>
+            </div>
+        </div>
+
+        <div id="InputPopup" class="popup">
+            <div class="popup-content">
+                <button class="close-popup" id="closeInput" onclick="closeButtonAdd()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>Add Items</h2>
+                <form id="AddQuantityForm">
+                    <input type="hidden" name="model" id="modelInput">
+                    <input type="hidden" name="delivery" id="deliveryInput">
+                    <input type="hidden" name="campus" id="campusInput">
+                    <input type="number" id="QuantityInput" name="quantityinput" min="0" max="999" step="1" value="0">
+                    <button class="action-btn" name="action" value="add">Confirm</button>
+                </form>
+            </div>
+        </div>
+
+         <div id="RemovePopup" class="popup">
+            <div class="popup-content">
+                <button class="close-popup" id="closeRemove" onclick="closeButtonDelete()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>Remove Items</h2>
+                <form id="RemoveQuantityForm">
+                    <input type="hidden" name="model" id="modelRemove">
+                    <input type="hidden" name="delivery" id="deliveryRemove">
+                    <input type="hidden" name="campus" id="campusRemove">
+                    <input type="number" id="QuantityInput" name="quantityinput" min="0" max="999" step="1" value="0">
+                    <button class="action-btn" name="action" value="remove">Confirm</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="TonerPopup" class="popup">
+            <div class="popup-content">
+                <button class="close-popup" onclick="closeButtonToner()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>Remove Toner</h2>
+                <form id="TonerForm">
+                    <input type="hidden" name="sticker_id" id="sticker_id">
+                    <span style="padding: 10px; ">Are you sure you want to get rid of the toner: </span>
+                    <span id="tonerNumber" style="font-weight: bold;"></span>
+                    <br>
+                    <br>
+                    <button style="width: 100%; margin-left: 0;"class="action-btn" name="action" value="confirm">Confirm</button>
+                    
+                </form>
+            </div>
+        </div>
+
+        <div id="TonerAdd" class="popup">
+            <div class="popup-content-input">
+                <button class="close-popup" onclick="closeAddToner()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>Add Toner</h2>
+            <form id="TonerAddForm" style="display: flex; flex-direction: column;">
+                    <label for="Date-Received">Date Received:</label>
+                    <input type="date" id="Date-Received" name="date-received" class="form-inputs" value="<?php echo date('Y-m-d'); ?>" required>
+
+                    <input type="text" id="Toner-ID" name="toner-id" maxlength="255" placeholder= "Toner ID" class="form-inputs" required>
+                
+
+                    <select id="Color" name="color" class="form-inputs" required>
+                            <option value="" disabled selected>Select Toner Color</option>
+                            <option value="Black">Black</option>
+                            <option value="Magenta">Magenta</option>
+                            <option value="Cyan">Cyan</option>
+                            <option value="Yellow">Yellow</option>
+                        </select>
+                    
+
+                    <input type="text" id="Toner-Model" name="toner-model" placeholder="Printer Model" maxlength="255" class="form-inputs" required >
+
+                    <select id="Toner-Location" name="toner-location" class="form-inputs" maxlength="255" required>
+                        <option value="" disabled selected>Where is it going?</option>
+                        <option value="CE/Q/W/Canon: Toner Closet">CE/Q/W/Canon: Toner Closet</option>
+                        <option value="CF: Upstairs">CF: Upstairs</option>
+                    </select>
+                    
+                    <button type="submit" id="submitAddToner" style = "margin-left: 0px; margin-top: 15px;" 
+                    class="action-btn">Submit</button>
+                    
+                    <div class="decorative-line"></div>
+                </form>
+            </div>
+        </div>
+
+        <div id="ModelAdd" class="popup">
+            <div class="popup-content-input">
+                <button class="close-popup" onclick="closeModelAdd()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>Add/Remove Model</h2>
+                    <form id="ModelForm" style="display: flex; flex-direction: column;">
+
+                    <input type="text" id="Model-Tag" class="form-inputs" name="model-tag" placeholder="Model" maxlength="255" required>
+
+                    <select id="Type-of-Delivery" name="type-of-delivery" class="form-inputs" required>
+                    <option value="" disabled selected>Select the Type of Equipment</option>
+                    <option value="Laptops">Laptop</option>
+                    <option value="Desktops">Desktops</option>
+                    <option value="Monitors">Monitors</option>
+                    <option value="Macs">Macs</option>
+                    <option value="Printers">Printers</option>
+                    <option value="Peripherals">Consumable</option>
+                    <option value="AV">Audio/Visual</option>
+                    </select>  
+
+                    <select id="Campus" name="campus" class="form-inputs" required>
+                      <option value="" disabled selected>Enter Campus</option>
+                      <option value="Downcity">Downcity</option>
+                      <option value="Harborside">Harborside</option>
+                    </select>
+                    
+                    <button type="submit"name="action" value="add"
+                    class="action-btn" style="margin-left:0px; margin-bottom: 10px;">Add</button>
+
+                    <button type="submit" name="action" value="remove"
+                    class="action-btn" style="margin-left:0px; margin-top: 10px;">Remove</button>
+                    </form>
+            </div>
+     </div>
+
+     <div id="EquipmentAdd" class="popup">
+            <div class="popup-content-input">
+                <button class="close-popup" onclick="closeAddEquipment()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>Add Open Equipment</h2>
+                    <form id="EquipmentAddForm" style="display: flex; flex-direction: column;">
+
+                    <input type="text" id="asset_tag" class="form-inputs" name="asset_tag" placeholder="Asset Tag" maxlength="5" required>
+
+                    <select id="Type-of-Delivery" onchange="modelSelection(this.value)" name="type-of-delivery" class="form-inputs" required>
+                        <option value="" disabled selected>Select the Type of Equipment</option>
+                        <option value="Laptops">Laptop</option>
+                        <option value="Desktops">Desktops</option>
+                        <option value="Monitors">Monitors</option>
+                        <option value="Printers">Printers</option>
+                    </select>  
+
+                    <select id="EQ_Model" name="eq_model" class="form-inputs" required>
+                        <option value="" disabled selected>Select the model</option>
+                    </select>
+
+                    <select id="located" name="located" class="form-inputs" required>
+                        <option value="" disabled selected>Select where the Item is</option>
+                        <option value="Work Bench">Work Bench</option>
+                        <option value="Cage">Cage</option>
+                        <option value="Techs Desk">Techs Desk</option>
+                        <option value="Holding">Holding</option>
+                    </select>  
+
+                    <select id="Campus" name="campus" class="form-inputs" required>
+                      <option value="" disabled selected>Enter Campus</option>
+                      <option value="Downcity">Downcity</option>
+                      <option value="Harborside">Harborside</option>
+                    </select>
+                    
+                    <button type="submit"name="action" value="add"
+                    class="action-btn" style="margin-left:0px; margin-bottom: 10px;">Add</button>
+                    </form>
+            </div>
+     </div>
+
+     <div id="EQPopup" class="popup">
+            <div class="popup-content">
+                <button class="close-popup" onclick="closeButtonEQ()"><i class="fa-solid fa-xmark"></i></button>
+                <h2>Remove Equipment</h2>
+                <form id="eqForm">
+                    <input type="hidden" name="asset_tags" id="asset_tags">
+                    <span style="padding: 10px; ">Are you sure you want to get rid of the Equipment: </span>
+                    <span id="eqNumber" style="font-weight: bold;"></span>
+                    <br>
+                    <br>
+                    <button type="submit" name="action" value="remove" style="width: 100%; margin-left: 0;"class="action-btn" > Confirm </button>
+                </form>
+            </div>
+        </div>
+           
+
+    </div>
+
+    <div class="bottom-box-container">
+        <div class="tonerBottom-left">
+            <div class="table-header">
+                    <h2>Toner</h2>
+                    <button style="margin-left: 0;"class="action-btn" onclick="showAddToner()">Input Toner</button>
+                    <button onclick="printSticker(event)" class="action-btn" id="print">Print Sticker</button>
+                    <input type="text" id="searchInput" placeholder="Search...">
+                </div>
+                <div class="box-content">
+                    <div class="tablewrapper-toner">
+                   <table id="tonerTable" border = "1">
+                    <thead id="tonerHead">
+                        <tr>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="sticker_id" style="display: none;">Sticker ID</input>
+                                </label>
+                            </th>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="Toner_ID" style="display: none;">Toner ID</input>
+                                </label>
+                            </th>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="Printer_model" style="display: none;">Printer Model</input>
+                                </label>
+                            </th>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="Color" style="display: none;">Color</input>
+                                </label>
+                            </th>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="Located" style="display: none;">Location</input>
+                                </label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                   </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="tonerBottom-right">
+            <div class="table-header">
+                    <h2>Open Equipment</h2>
+                    <button style="margin-left: 0;"class="action-btn" onclick="showAddEquipment()">Input Equipment</button>
+                    <input type="text" id="EQsearchInput" placeholder="Search...">
+                </div>
+                <div class="box-content">
+                    <div class="tablewrapper-toner">
+                   <table id="eqTable" border = "1">
+                    <thead id="eqHead">
+                        <tr>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="asset_tag" style="display: none;">Asset Tag</input>
+                                </label>
+                            </th>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="EQ_Type" style="display: none;">Hardware Type</input>
+                                </label>
+                            </th>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="Model" style="display: none;">Model Type</input>
+                                </label>
+                            </th>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="located" style="display: none;">Location</input>
+                                </label>
+                            </th>
+                            <th id='tonerTH' style="position: sticky;">
+                                <label class="sortButtons">
+                                    <input type="radio" name="search" value="campus" style="display: none;">Campus</input>
+                                </label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                   </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+    <div id="notification" class="notification"></div>
+
+
+<div class="container mt-4">
+<div class = "button-container" style="display: flex; gap: 10px;">
+    <table id="recentTable" class="table table-sm mt-3" style="display: none; justify-content: left; align-items: center; width: 100px;">
+                <thead>
+                    <tr>
+                        <th>Recent Sticker ID</th>
+                    </tr>
+                </thead>
+                <tbody id="recentResult" style="justify-content: left; align-items: center; width: 450px;">
+                    <!-- Data will be inserted here -->
+                </tbody>
+            </table> 
+    </div>
+</div>
+<footer>
+    <p>© Johnson & Wales University 2025</p>
+ </footer>
+    <div class="decorative-line"></div>
+    <div class = "search-header"></div>
+    </div> 
+<div id="modal" class="modal">
+    <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <h2>Please Enter Information</h2>
+        <form id="inputForm">
+            <label for="userInput">Your Input:</label>
+            <input type="text" id="userInput" name="userInput" required>
+            <button type="submit" onclick="delayedFetch()">Submit</button>
+        </form>
+    </div>
+</div>
+  </div>
+    <script>
+
+    let clickedAction = ''; // Variable to hold which button you pressed
+    const popup = document.getElementById("InputPopup");
+    const closeBtn = document.getElementById("closeInput");
+
+    const popupIntro = document.getElementById("IntroPopup");
+    const closeIntro = document.getElementById("closeIntro");
+
+    const tonerBtn = document.getElementById("TonerPopup");
+    const deleteToner = document.getElementById('TonerForm');
+
+    const tonerAdd = document.getElementById("TonerAdd");
+    const tonerAddForm = document.getElementById("TonerAddForm");
+
+    const equipmentAdd = document.getElementById("EquipmentAdd");
+    const equipmentAddForm = document.getElementById("EquipmentAddForm");
+
+    const eqBtn = document.getElementById("EQPopup");
+    const deleteEQ = document.getElementById('eqForm');
+
+    const modelAR = document.getElementById('ModelAdd');
+    const modelForm = document.getElementById('ModelForm');
+
+    const RemovePopup = document.getElementById("RemovePopup");
+    const closeRemove = document.getElementById("closeRemove");
+
+    const addquantityForm = document.getElementById("AddQuantityForm");
+    const removequantityForm = document.getElementById("RemoveQuantityForm");
+
+    const sticker_id = document.getElementById("sticker_id");
+    const notifications = document.getElementById('notification');
+    const themeToggle = document.getElementById('themeToggle');
+
+
+    let search = '';
+
+    //Dropdown Code for profile icon
+
+   const profileIcon = document.getElementById("profileIcon");
+  const dropdown = document.getElementById("dropdown");
+
+  profileIcon.addEventListener("click", function (e) {
+    e.stopPropagation(); // Prevents the document click from immediately hiding the dropdown
+
+    dropdown.classList.toggle("show");
+  });
+
+  // Close dropdown when clicking outside of it
+  document.addEventListener("click", function (e) {
+    if (!document.getElementById("profile").contains(e.target)) {
+      dropdown.classList.remove("show");
+    }
+  });
+
+
+   const menuIcon = document.getElementById("menuIcon");
+  const menudropdown = document.getElementById("menudropdown");
+
+  menuIcon.addEventListener("click", function (e) {
+    e.stopPropagation(); // Prevents the document click from immediately hiding the dropdown
+
+    menudropdown.classList.toggle("show");
+  });
+
+  // Close dropdown when clicking outside of it
+  document.addEventListener("click", function (e) {
+    if (!document.getElementById("profile").contains(e.target)) {
+      menudropdown.classList.remove("show");
+    }
+  });
+
+  //End of Dropdown Code
+
+  //Code for the views
+
+function TableLoader(){
+  fetch(`data.json`)
+    .then(response=> response.json())
+    .then(result=> {
+        populateTable('Desktops', result.Desktops, 'Desktopstable');
+        populateTable('Laptops', result.Laptops, 'Laptopstable');
+        populateTable('Monitors', result.Monitors, 'Monitorstable');
+        populateTable('Peripherals', result.Peripherals, 'Peripheralstable');
+        populateTable('Printers', result.Printers, 'Printerstable');
+        populateTable('AV', result.AV, 'AVtable');
+        populateTonerTable('Toner', result.Toner, 'tonerTable');
+        populateOpenTable('OpenEQ', result.OpenEQ, 'eqTable');
+      })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+function populateTable(category, items, tableId){
+    const tbody = document.getElementById(tableId).querySelector('tbody');
+
+    for(let key in items){
+        const item = items[key]
+        const row = document.createElement('tr');
+
+        row.innerHTML = ` 
+        <td><span style="display:flex; justify-content:space-between;">${item.quantity} <span>
+        <button class="action-btn" id="${item.model}" onclick="showPopupDelete(this)" name="operation" value="remove_${item.model}"><i class="fa-solid fa-minus"></i></button>
+        <button class="action-btn" id="${item.model}" onclick="showPopupAdd(this)"  name="operation" value="add_${item.model}"><i class="fa-solid fa-plus"></i></button>
+        </span>
+        </span></td>
+        <td>${item.model}</td>
+        <td>${item.campus}</td>`;
+
+        tbody.appendChild(row);
+    }
+}
+   
+function populateTonerTable(category, items, tableId){
+    const tbody = document.getElementById(tableId).querySelector('tbody');
+
+    for(let key in items){
+        const item = items[key]
+        const row = document.createElement('tr');
+
+        row.innerHTML = ` 
+        <td class="tonerRows">
+        <span style="display:flex; justify-content:space-between;">${item.asset_id} 
+        <span>
+        <button class="action-btn" id="${item.asset_id}" onclick="showButtonToner(this)" name="operation" value="${item.asset_id}"><i class="fa-solid fa-minus"></i></button>
+        </span>
+        </span>
+        </td>
+        <td>${item.part_number}</td>
+        <td>${item.models}</td>
+        <td>${item.color}</td>
+        <td>${item.storage_location}</td>`;
+
+        tbody.appendChild(row);
+    }
+}
+
+    function populateOpenTable(category, items, tableId){
+        const tbody = document.getElementById(tableId).querySelector('tbody');
+
+        for(let key in items){
+            const item = items[key]
+            const row = document.createElement('tr');
+
+            row.innerHTML = ` 
+            <td class="tonerRows">
+            <span style="display:flex; justify-content:space-between;">${item.asset_id} 
+            <span>
+            <button class="action-btn" id="${item.asset_id}" onclick="showButtonEQ(this)" name="operation" value="${item.asset_id}"><i class="fa-solid fa-minus"></i></button>
+            </span>
+            </span>
+            </td>
+            <td>${item.category}</td>
+            <td>${item.model}</td>
+            <td>${item.location}</td>
+            <td>${item.campus}</td>`;
+
+            tbody.appendChild(row);
+        }
+    }
+
+
+    //END Code for the views
+
+
+    //code for the searchbar for toner
+
+    document.getElementById('searchInput').addEventListener('input', function () {
+    const searchTerm = this.value.toLowerCase();
+    const tbody = document.getElementById("tonerTable").querySelector('tbody');    
+    tbody.innerHTML = ''; // clear previous rows
+
+    fetch('data.json')
+        .then(response => response.json()) // ⬅️ Parse JSON properly
+        .then(data => {
+            const arr = Object.values(data).flatMap(group=> Object.values(group));
+
+            const filtered = arr.filter(item =>
+                item.part_number?.toLowerCase().includes(searchTerm)
+            );
+
+            filtered.forEach(result => {
+                const row = document.createElement('tr'); // create a new row for each result
+                row.innerHTML = `
+                    <td class="tonerRows">
+                        <span style="display:flex; justify-content:space-between;">
+                            ${result.asset_id}
+                            <span>
+                                <button class="action-btn" id="${result.asset_id}" onclick="showButtonToner(this)" name="operation" value="${result.asset_id}">
+                                    <i class="fa-solid fa-minus"></i>
+                                </button>
+                            </span>
+                        </span>
+                    </td>
+                    <td>${result.part_number}</td>
+                    <td>${result.models}</td>
+                    <td>${result.color}</td>
+                    <td>${result.storage_location}</td>
+                `;
+                tbody.appendChild(row); // add row to the table
+            });
+        })
+        .catch(console.error);
+});
+              
+        document.getElementById('EQsearchInput').addEventListener('input', function () {
+            const searchTerm = this.value.toLowerCase();
+            const tbody = document.getElementById("eqTable").querySelector('tbody');    
+            tbody.innerHTML = ''; // clear previous rows
+
+            fetch('data.json')
+                .then(response => response.json()) // ⬅️ Parse JSON properly
+                .then(data => {
+                    const arr = Object.values(data).flatMap(group=> Object.values(group));
+
+                    const filtered = arr.filter(item =>
+                        item.model?.toLowerCase().includes(searchTerm)
+                    );
+
+                    filtered.forEach(result => {
+                        const row = document.createElement('tr'); // create a new row for each result
+                        row.innerHTML = `
+                            <td class="tonerRows">
+                            <span style="display:flex; justify-content:space-between;">${result.asset_id} 
+                            <span>
+                            <button class="action-btn" id="${result.asset_id}" onclick="showButtonEQ(this)" name="operation" value="${result.asset_id}"><i class="fa-solid fa-minus"></i></button>
+                            </span>
+                            </span>
+                            </td>
+                            <td>${result.category}</td>
+                            <td>${result.model}</td>
+                            <td>${result.location}</td>
+                            <td>${result.campus}</td>
+                        `;
+                        tbody.appendChild(row); // add row to the table
+                    });
+                })
+                .catch(console.error);
+        });
+        //end code for the searchbar
+
+       
+    document.querySelectorAll('input[name="search"]').forEach(radio =>{
+        radio.addEventListener('change', event => {
+        const sort = event.target.value;
+        search = sort;
+        TonerTableLoader();
+        });
+    })
+
+
+    tonerAddForm.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        const formData = new FormData(tonerAddForm);
+
+        fetch('query/tonerAdd.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    closeAddToner();
+                    TonerTableLoader();
+                    tonerAddForm.reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    });
+
+
+      deleteToner.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        const formData = new FormData(deleteToner);
+
+        fetch('query/tonerRetrieval.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    closeButtonToner();
+                    TonerTableLoader();
+                    document.getElementById('searchInput').value = '';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    });
+
+
+    modelForm.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        const formData = new FormData(modelForm);
+
+        const actionValue = event.submitter.value;
+        formData.set('action', actionValue);
+
+        fetch('query/ModelAR.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success === true){
+                        closeModelAdd();
+                        TableLoader();
+                        modelForm.reset();
+                    }
+                    else{
+                        showNotification('Model Already Exists');
+                        closeModelAdd();
+                        modelForm.reset();
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    });
+
+    addquantityForm.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        const formData = new FormData(addquantityForm);
+
+        const actionValue = event.submitter.value;
+        formData.set('action', actionValue);
+
+        fetch('query/QuantityChange.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    closeButtonAdd();
+                    closeButtonDelete();
+                    TableLoader();
+                    addquantityForm.reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    });
+
+    removequantityForm.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        const formData = new FormData(removequantityForm);
+
+        const actionValue = event.submitter.value;
+        formData.set('action', actionValue);
+
+        fetch('query/QuantityChange.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if(data.success){
+                        closeButtonAdd();
+                        closeButtonDelete();
+                        TableLoader();
+                        removequantityForm.reset();
+                    }
+                    else{
+                        closeButtonAdd();
+                        closeButtonDelete();
+                        removequantityForm.reset();
+                        showNotification("You're trying to take out too many items")
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    });
+
+
+        function modelSelection(selected){
+            const formData = new FormData();
+            formData.append('type-of-delivery', selected);
+
+            fetch('query/modelDropdown.php',{
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data =>{
+                    document.getElementById("EQ_Model").innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+
+        equipmentAddForm.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        const formData = new FormData(equipmentAddForm);
+        const actionValue = event.submitter.value;
+        formData.set('action', actionValue);
+
+        fetch('query/openEQ.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    closeAddEquipment();
+                    EQTableLoader();
+                    equipmentAddForm.reset();
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    });
+
+    deleteEQ.addEventListener('submit',function(event){
+        event.preventDefault();
+
+        const formData = new FormData(deleteEQ);
+        const actionValue = event.submitter.value;
+        formData.set('action', actionValue);
+    
+        fetch('query/openEQ.php', {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => response.text())
+                .then(data => {
+                    closeButtonEQ();
+                    EQTableLoader();
+                    document.getElementById('EQsearchInput').value = '';
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+    });
+
+
+    //Code to auto adjust the tables
+    const container = document.querySelector('bottom-box');
+    const tablesize = document.querySelector('peripheraltable');
+
+    container.style.height = `${tablesize.offsetHeight}px`;
+    container.style.width = `${tablesize.offsetWidth}px`;
+    //End of code for adjust
+
+    
+    //Popup Code for input
+   
+    // Close the popup
+    function closeButtonIntro(){
+        popupIntro.style.display = "none";
+        document.body.classList.remove('modal-open');
+        }
+
+    // Show the popup
+    function showPopupAdd(button) {
+        const model= button.id;
+        const table = button.dataset.role;
+        const campus= button.dataset.campus;
+        document.getElementById('modelInput').value = model;
+        document.getElementById('campusInput').value = campus;
+        document.getElementById('deliveryInput').value = table;
+        popup.style.display = "flex";
+        document.body.classList.add('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = '';
+            el.style.top = '';
+        });
+        }
+
+    // Close the popup
+    function closeButtonAdd(){
+        popup.style.display = "none";
+        document.body.classList.remove('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = 'sticky';
+            el.style.top = 0;
+        });
+        }
+
+        // Show the popup
+    function showPopupDelete(button) {
+        const model= button.id;
+        const table = button.dataset.role;
+        const campus= button.dataset.campus;
+        document.getElementById('modelRemove').value = model;
+        document.getElementById('deliveryRemove').value = table;
+        document.getElementById('campusRemove').value = campus;
+        RemovePopup.style.display = "flex";
+        document.body.classList.add('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = '';
+            el.style.top = '';
+        });
+        }
+
+    // Close the popup
+    function closeButtonDelete(){
+        RemovePopup.style.display = "none";
+        document.body.classList.remove('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = 'sticky';
+            el.style.top = 0;
+        });
+        }
+
+    // open the popup
+    function showButtonToner(button){
+        const toner= button.id;
+        document.getElementById('sticker_id').value = toner;
+        document.getElementById('tonerNumber').textContent = toner;
+        tonerBtn.style.display = "flex";
+        document.body.classList.add('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = '';
+            el.style.top = '';
+        });
+        }
+
+    // Close the popup
+    function closeButtonToner(){
+        tonerBtn.style.display = "none";
+        document.body.classList.remove('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = 'sticky';
+            el.style.top = 0;
+        });
+        }
+
+    
+    // Open the popup
+    function showAddToner(){
+        tonerAdd.style.display = "flex";
+        document.body.classList.add('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = '';
+            el.style.top = '';
+        });
+        }
+
+    // Close the popup
+    function closeAddToner(){
+        tonerAdd.style.display = "none";
+        document.body.classList.remove('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = 'sticky';
+            el.style.top = 0;
+        });
+        }
+
+    // Open the popup
+    function showModelAdd(){
+        modelAR.style.display = "flex";
+        document.body.classList.add('modal-open');
+
+       document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = '';
+            el.style.top = '';
+        });
+        }
+
+    // Close the popup
+    function closeModelAdd(){
+        modelAR.style.display = "none";
+        document.body.classList.remove('modal-open');
+        modelForm.reset();
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = 'sticky';
+            el.style.top = 0;
+        });
+        }
+    // Open the popup
+    function showAddEquipment(){
+        equipmentAdd.style.display = "flex";
+        document.body.classList.add('modal-open');
+
+       document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = '';
+            el.style.top = '';
+        });
+        }
+
+    // Close the popup
+    function closeAddEquipment(){
+        equipmentAdd.style.display = "none";
+        document.body.classList.remove('modal-open');
+        equipmentAddForm.reset();
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = 'sticky';
+            el.style.top = 0;
+        });
+        }
+
+    // open the popup
+    function showButtonEQ(button){
+        const asset_tag= button.id;
+        document.getElementById('asset_tags').value = asset_tag;
+        console.log(document.getElementById('asset_tags').value)
+        document.getElementById('eqNumber').textContent = asset_tag;
+        eqBtn.style.display = "flex";
+        document.body.classList.add('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = '';
+            el.style.top = '';
+        });
+        }
+
+    // Close the popup
+    function closeButtonEQ(){
+        eqBtn.style.display = "none";
+        document.body.classList.remove('modal-open');
+
+        document.querySelectorAll("#tonerTH").forEach(el => {
+            el.style.position = 'sticky';
+            el.style.top = 0;
+        });
+        }
+
+
+        // Function to show notification
+        function showNotification(message) {
+            notifications.textContent = message;
+            notifications.style.display = 'block';
+
+            setTimeout(() => {
+                notifications.style.display = 'none';
+            }, 3000);
+        }
+    
+ 
+async function printSticker(event) {
+    if (event) event.preventDefault();
+    try {
+        const response = await fetch('query/recentSticker.php');
+
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+
+        const data = await response.text(); // Get the response as plain text
+
+        const tonerResultBody = document.getElementById('recentResult');
+        tonerResultBody.innerHTML = ''; // Clear previous results
+
+        const rows = data.trim().split('\n'); // Split the plain text response into rows
+
+        rows.forEach(sticker_id => {
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `<td>${sticker_id}</td>`;
+            tonerResultBody.appendChild(newRow);
+        });
+
+        const sticker_id = rows[0]; // Assuming you want the first sticker_id for the barcode
+
+        if(sticker_id === null || sticker_id === "" || sticker_id === "No data available."){
+            showAlert();
+        }
+        else{
+        var barcodeUrl = "https://barcode.tec-it.com/barcode.ashx?data=" + sticker_id; // URL to generate Code 39 barcode
+
+        var printWindow = window.open('', '', 'width=600,height=400');
+        printWindow.document.write('<html><head><title>Print Label</title>');
+        printWindow.document.write('<style>@page { margin: 0; }</style>');
+        printWindow.document.write('</head><body>');
+        printWindow.document.write('<div style="width:337px; height:106px; font-size:24px; text-align:center; transform:rotate(90deg); transform-origin: 50px 70px;">');
+        printWindow.document.write('<div style="font-size:14px;">' + sticker_id + '</div>'); // Print the number with smaller font size
+        printWindow.document.write('<img src="' + barcodeUrl + '" style="width:250px; height:100px;"/>'); // Print the barcode with smaller size
+        printWindow.document.write('</div>');
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+
+        // Ensure the entire document is loaded before printing
+        printWindow.onload = function() {
+            printWindow.print();
+        };
+
+        // Event listener for after printing
+        printWindow.onafterprint = function() {
+            // Wait 5 seconds before returning to the original page
+            setTimeout(function() {        
+                // Option 2: Redirect to the original page (if you want to go to another URL)
+                printWindow.close();
+                // window.location.href = "your-original-page-url.html";
+            }, 1000); // 5000 ms = 5 seconds
+        };
+    }
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+
+    function loadTheme(checkbox) {
+        const currentTheme = checkbox.checked ? 'light' : 'dark';
+        if (currentTheme === 'light') {
+            document.body.classList.add('dark-theme');
+            themeToggle.checked = true;
+            console.log(currentTheme);
+        } else {
+            document.body.classList.remove('dark-theme');
+            themeToggle.checked = false;
+            console.log(currentTheme);
+        }
+    }
+    </script>
+ 
+</body>
+</html>
