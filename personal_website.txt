@@ -1,5 +1,0 @@
-cloudflare nameservers for website
-
-kate.ns.cloudflare.com
-wells.ns.cloudflare.com
-
