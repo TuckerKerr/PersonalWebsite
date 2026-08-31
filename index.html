@@ -1,174 +1,83 @@
-<!DOCTYPE html> 
-		<html lang="en">
-			<head>
-                <link rel="stylesheet" href="style.css">
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-				<title>Personal Website | Tucker Kerr</title>
-			</head>
-                <div class="topnav">
-                    <div class="left-hug">
-                        <span><a onclick="scrolltoSection('aboutme')" style="color: inherit; text-decoration: none; cursor: pointer;">About Me</a></span> 
-                        <span> &emsp; </span>
-                        <span><a onclick="scrolltoSection('skills')" style="color: inherit; text-decoration: none; cursor: pointer;">Skills</a></span>
-                        <span> &emsp; </span>
-                        <span><a onclick="scrolltoSection('projects')" style="color: inherit; text-decoration: none; cursor: pointer;">Projects</a></span>
-                        <span> &emsp; </span>
-                        <span><a onclick="scrolltoSection('contactme')" style="color: inherit; text-decoration: none; cursor: pointer;">Contact Me</a></span>
-                    </div>
-                    <div class="right-hug">
-                        <span></span>
-                        <span> &emsp; </span>
-                        <span><a href="https://github.com/TuckerKerr"><img class="icons" src="icon/github-logo.webp"></a></span>
-                        <span> &emsp; </span>
-                        <span><a href="https://www.linkedin.com/in/tucker-kerr/"><img class="icons" src="icon/linkedin-black.webp"></a></span>
-                    </div>
-                </div>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Tucker Kerr is a software engineering and IT professional building practical, people-centered applications, APIs, and operational tools.">
+  <meta name="theme-color" content="#173b2d">
+  <title>Tucker Kerr | Developer & IT Problem Solver</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="Tucker Kerr home"><span>TK</span>Tucker Kerr</a>
+    <button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation"><i class="fa-solid fa-bars"></i></button>
+    <nav id="site-nav" aria-label="Primary navigation">
+      <a href="#about">About</a><a href="#experience">Experience</a><a href="#work">Work</a><a href="#contact">Contact</a>
+      <a class="nav-resume" href="Kerr_resume.pdf" download>Resume <i class="fa-solid fa-download"></i></a>
+    </nav>
+  </header>
 
-                <section class="containers" id="aboutme">
-                <div class="box-left-column">
-                    <div class="box-header">
-                        <h1 class="titles">About Me</h1> 
-                    </div>
-                    <div class="box-content" style="flex-direction: column;">
-                        <div class="self-photo">
-                            <img class="self-photo" src="icon/self-photo.webp">
-                        </div>
-                        <div class="personal-text">
-                            <p class="text" style="margin-top: 10px;">My name is Tucker and I am a computer science major at Johnson & Wales (JWU) University. I have been working as an IT Field Technician and Web App Developer within JWU's IT team.</p> 
-                            <p class="text">I am currently in the search of finding an internship and hopefully a company I would happily return to.</p>
-                            <br />
-                            <p class="text">Outside of work and professional settings I am on the hunt for records to collect, listening to music, watching movies, and playing videogames.</p>
-                            <button class="action-btn"><a href="Kerr_resume.pdf" style="color: white; text-decoration: none; cursor: pointer;" download="Kerr_resume.pdf">Download My Resume</a></button>
-                        </div>
-                    </div>
-                </div>
+  <main id="main">
+    <section class="hero" id="home">
+      <div class="hero-copy reveal">
+        <p class="eyebrow"><span></span> Software Engineering · IT Operations · Web Development</p>
+        <h1>I build useful software for <em>real people</em> and real workflows.</h1>
+        <p class="hero-text">I’m Tucker, a computer science student with software engineering, full-stack development, testing, and IT operations experience. I turn complex rules and everyday workflows into clear, dependable tools.</p>
+        <div class="hero-actions"><a class="button primary" href="#work">See my work <i class="fa-solid fa-arrow-down"></i></a><a class="button secondary" href="mailto:tuckerkerrbusi@gmail.com">Let’s talk</a></div>
+        <ul class="quick-facts" aria-label="Professional highlights"><li><strong>3.9</strong><span>GPA</span></li><li><strong>1,000+</strong><span>assets supported</span></li><li><strong>2027</strong><span>graduation</span></li></ul>
+      </div>
+      <div class="portrait-wrap reveal">
+        <div class="portrait-frame"><img src="icon/self-photo.webp" alt="Professional portrait of Tucker Kerr" width=".5vw" height=".5vh"></div>
+        <div class="availability"><i class="fa-solid fa-seedling"></i><span><strong>Growing through good problems</strong>Open to software and IT opportunities</span></div>
+      </div>
+    </section>
 
-                <div class="side-box">
-                    <div class="top-box" id="skills">
-                        <div class="top-container">
-                            <div class="box-header">
-                            <h1>Skills</h1>
-                            </div>
-                            <div class="box-content">
-                                <div class="icon-text">
-                                    <a><i class="fa-brands fa-html5 fa-10x"></i></a>
-                                    <p class="text">HTML</p>
-                                </div>
-                                <div class="icon-text">
-                                    <a><i class="fa-brands fa-php fa-8x"></i></a>
-                                    <p class="text">PHP</p>
-                                </div>
-                                <div class="icon-text">
-                                    <a><i class="fa-solid fa-database fa-10x"></i></a>
-                                    <p class="text">SQL</p>
-                                </div>
-                                <div class="icon-text">
-                                    <a><i class="fa-brands fa-python fa-10x"></i></a>
-                                    <p class="text">Python</p>
-                                </div>
-                                <div class="icon-text">
-                                    <a><i class="fa-brands fa-java fa-10x"></i></a>
-                                    <p class="text">Java</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                
-                    <div class="bottom-box" id="contactme">
-                        <div class="bottom-container">
-                            <div class="box-header">
-                                <h1>Contact Me</h1>
-                            </div>
-                            <div class="box-content">
-                                <div class="project-container">
-                                    <div class="project-text">
-                                        <form id="contactForm" class="contact_form">
-                                            <h2>Your Name: </h2>
-                                                <input input="text" name="name" class="form-inputs" placeholder="Ex: John Doe">
-                                            <h2>Your Email: </h2>
-                                                <input type="email" name="email" class="form-inputs" placeholder="Ex: JDoe@comapny.com">
-                                            <h2>Your Subject: </h2>
-                                                <input input="text" name="subject" class="form-inputs" placeholder="Ex: Website contact">
-                                            <h2>Your Message: </h2>
-                                                <textarea input="text" name="message" class="form-inputs" placeholder="Ex: Cool Website!"></textarea>
-                                            <button type="submit" class="action-btn">Send</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <section class="containers" id="projects">
-                    <div class="box-header">
-                            <h1>Projects</h1>
-                            </div>
-                            <div class="box-content">
-                                <div class="project-container">
-                                    <div class="project-text">
-                                        <h2>Asset Management</h2>
-                                        <p class="text" style="margin-top: 10px;">This is a project I started my sophomore year of college. It is an asset management system that I created specifically for my IT department. It tracks all of the inventory on campus from monitors and laptops to toner and printers.</p> 
-                                        <form action="https://www.tuckerkerr.com/inventory/index.html">
-                                            <button class="action-btn">Go to Inventory</button>
-                                        </form>
-                                    </div>
-                                    <div>
-                                        <img src="icon/inventory-photo.webp" style="width: 100%;">
-                                    </div>
-                                </div>
-                                <!--
-                                <div class="project-container">
-                                     <div class="project-text">
-                                        <h2>Asset Management</h2>
-                                        <p class="text" style="margin-top: 10px;">This is a project I started my sophomore year of college. It is an asset management system that I created specifically for my IT department. It tracks all of the inventory on campus from monitors and laptops to toner and printers.</p> 
-                                    </div>
-                                    <div>
-                                        <img src="icon/inventory-photo.webp" style="width: 100%;">
-                                    </div>
-                                </div> /
-                                 -->
-                            </div> 
-                </section>
+    <section class="intro section" id="about">
+      <div class="section-label"><span>01</span> ABOUT</div>
+      <div class="intro-grid">
+        <h2>Technical curiosity,<br><em>grounded in service.</em></h2>
+        <div class="intro-copy"><p>I like work where technology has a visible impact. I have tested multi-state rating systems, analyzed data through SQL and JSON APIs, and developed full-stack applications that improve real IT support workflows.</p><p>My work in field services and as a Residential Assistant has strengthened the other half of how I operate: listening closely, documenting clearly, collaborating across teams, and staying composed when the answer is not immediately obvious.</p></div>
+      </div>
+      <div class="personal-strip">
+        <p>When I’m away from a keyboard, you’ll usually find me…</p>
+        <div class="interests"><span><i class="fa-solid fa-leaf"></i> Tending plants</span><span><i class="fa-solid fa-utensils"></i> Trying a recipe</span><span><i class="fa-solid fa-record-vinyl"></i> Hunting for records</span><span><i class="fa-solid fa-headphones"></i> Listening closely</span><span><i class="fa-solid fa-film"></i> Watching movies</span></div>
+      </div>
+    </section>
 
-                <div id="notification" class="notification"></div>
-        <script>
-            import { put } from "@vercel/blob";
+    <section class="experience section" id="experience">
+      <div class="section-label"><span>02</span> EXPERIENCE & SKILLS</div>
+      <div class="experience-grid">
+        <div><h2>Where I’ve been<br><em>putting skills to work.</em></h2><div class="timeline">
+          <article><div class="timeline-dot"></div><p class="date">JUNE 2026 — AUGUST 2026</p><h3>Assistant Software Engineer Intern</h3><p class="organization">AIPSO · Johnston, RI · Hybrid</p><p>Performed end-to-end testing across development, integration, UAT, and sandbox environments. Used SQL, JSON APIs, and rating platforms to investigate discrepancies, validate rate changes, clean legacy code, and document multi-state insurance rating logic.</p></article>
+          <article><div class="timeline-dot"></div><p class="date">SEPT 2024 — PRESENT</p><h3>IT Field Technician</h3><p class="organization">Johnson & Wales University · Providence, RI</p><p>Develop full-stack tools for IT operations, design databases and RESTful APIs, ship responsive interfaces, and diagnose hardware problems across campus.</p></article>
+          <article><div class="timeline-dot"></div><p class="date">SEPT 2024 — PRESENT</p><h3>Residential Assistant</h3><p class="organization">Johnson & Wales University · Providence, RI</p><p>Support a community of 60+ residents through event planning, conflict mediation, incident response, and thoughtful communication.</p></article>
+          <article><div class="timeline-dot"></div><p class="date">EXPECTED MAY 2027</p><h3>B.S. in Computer Science</h3><p class="organization">Johnson & Wales University · 3.9 GPA</p><p>Dean’s List, Upsilon Pi Epsilon Computer Science Honor Society, and Theta Delta Chi Fraternity.</p></article>
+        </div></div>
+        <div class="skills-panel"><p class="skills-kicker">TECHNICAL TOOLKIT</p><div class="skill-group"><h3>Languages</h3><div class="chips"><span>Python</span><span>Java</span><span>C</span><span>C++</span><span>PHP</span><span>JavaScript</span><span>HTML/CSS</span><span>Kotlin</span><span>SQL</span></div></div><div class="skill-group"><h3>Data, APIs & Delivery</h3><div class="chips"><span>MySQL</span><span>Oracle DB</span><span>MongoDB</span><span>RESTful APIs</span><span>JSON APIs</span><span>Azure DevOps</span><span>Agile</span></div></div><div class="skill-group"><h3>Tools & Systems</h3><div class="chips"><span>Git</span><span>Linux</span><span>Windows</span><span>VS Code</span><span>AI-assisted development</span><span>Software testing</span></div></div><blockquote>“The best tools don’t just work — they make someone’s day easier.”</blockquote></div>
+      </div>
+    </section>
 
-            const notifications = document.getElementById('notification');
+    <section class="work section" id="work">
+      <div class="section-heading"><div class="section-label"><span>03</span> FEATURED WORK</div><h2>Built from a real need,<br><em>used in the real world.</em></h2></div>
+      <article class="project-card">
+        <a class="project-visual" href="inventory/index.html" aria-label="Open the Inventory Management demo"><img src="icon/inventory-photo.webp" alt="Inventory Management dashboard showing campus hardware quantities" width="1905" height="915"><span>Live static demo <i class="fa-solid fa-arrow-up-right-from-square"></i></span></a>
+        <div class="project-info"><p class="project-number">PROJECT 01</p><h3>Inventory Management System</h3><p>What began as a sophomore-year project grew into a full-stack asset management application for IT Field Services. It tracks laptops, monitors, printers, toner, and other campus equipment through a role-aware interface.</p><div class="project-results"><div><strong>1,000+</strong><span>asset records</span></div><div><strong>10+</strong><span>concurrent users</span></div><div><strong>2</strong><span>campus locations</span></div></div><div class="project-tags"><span>PHP</span><span>MySQL</span><span>JavaScript</span><span>Responsive UI</span><span>CRUD</span><span>Authentication</span></div><div class="project-links"><a href="inventory/index.html">Explore demo <i class="fa-solid fa-arrow-right"></i></a><a href="https://github.com/TuckerKerr/InventoryManagement" target="_blank" rel="noopener">View code <i class="fa-brands fa-github"></i></a></div></div>
+      </article>
+      <div class="second-project"><div><p class="project-number">PROJECT 02</p><h3>IT Student Ticketing System</h3></div><p>Collaborated in an agile team to streamline IT support workflows. Implemented an announcement chat system, authentication features, and a semester scheduling tool that limits staffing across two campuses.</p><div class="project-tags"><span>Team development</span><span>Agile</span><span>Authentication</span><span>Scheduling</span><span>PHP / MySQL</span></div></div>
+    </section>
 
-            function scrolltoSection(id){
-                const element = document.getElementById(id);
-                if(element){
-                    element.scrollIntoView({behavior: 'smooth'});
-                }
-            }
-
-            function showNotification(message) {
-                notifications.textContent = message;
-                notifications.style.display = 'block';
-
-                setTimeout(() => {
-                    notifications.style.display = 'none';
-                }, 3000);
-            }
-
-            document.getElementById("contactForm").addEventListener("submit", function(e) {
-                e.preventDefault();
-                
-                fetch("https://formspree.io/f/xzzjoejy", {
-                    method: "POST",
-                    body: new FormData(this),
-                    headers: { 'Accept': 'application/json' }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    showNotification("Thanks! Your message was sent.");
-                    document.getElementById("contactForm").reset();
-                })
-                .catch(error => alert("Error sending message"));
-            });
-        </script>
-
-    </body> 
+    <section class="contact section" id="contact">
+      <div class="contact-copy"><div class="section-label"><span>04</span> CONNECT</div><h2>Thanks for taking the<br><em>time to look around.</em></h2><p>I’m open to software engineering, web development, and technical IT opportunities. You can find more of my work, connect professionally, or reach me directly using the links below.</p></div>
+      <div class="contact-links" aria-label="Contact links"><a href="mailto:tuckerkerrbusi@gmail.com"><span><i class="fa-solid fa-envelope"></i><small>EMAIL</small><strong>tuckerkerrbusi@gmail.com</strong></span><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a href="https://www.linkedin.com/in/tucker-kerr/" target="_blank" rel="noopener"><span><i class="fa-brands fa-linkedin-in"></i><small>LINKEDIN</small><strong>Connect with me</strong></span><i class="fa-solid fa-arrow-up-right-from-square"></i></a><a href="https://github.com/TuckerKerr" target="_blank" rel="noopener"><span><i class="fa-brands fa-github"></i><small>GITHUB</small><strong>Explore my code</strong></span><i class="fa-solid fa-arrow-up-right-from-square"></i></a></div>
+    </section>
+  </main>
+  <footer><a class="wordmark" href="#home"><span>TK</span>Tucker Kerr</a><p>Designed with care, curiosity, and probably a record playing.</p><p>© <span id="year"></span> Tucker Kerr</p></footer>
+  <script src="script.js"></script>
+</body>
 </html>
