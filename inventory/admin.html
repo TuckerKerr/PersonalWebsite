@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Inventory Management — Admin</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="topnav">
+    <div class="profile" id="profile"><button class="profile-icon" id="profileIcon"><i
+          class="fa-solid fa-user"></i></button>
+      <div class="dropdown" id="dropdown">
+        <div class="username">
+          <h2>Portfolio Admin</h2>
+        </div>
+        <a href="https://github.com/TuckerKerr/InventoryManagement" class="dropdown-item"> Github <i class="fa-solid fa-code"></i></a>
+      </div>
+    </div>
+    <div class="menu" id="menu"><button class="menu-icon" id="menuIcon"><i class="fa-solid fa-folder-open"></i></button>
+      <div class="menudropdown" id="menudropdown">
+        <div class="username">
+          <h2>Menu</h2>
+        </div><a href="index.html" class="dropdown-item">Main Page <i class="fa-solid fa-bars"></i></a>
+        <div class="theme-toggle"><span>DC</span><label class="toggle-switch"><input type="checkbox"
+              id="campusToggle"><span class="toggle-slider"></span></label><span>HS</span></div>
+        <div class="theme-toggle"><span>Gray</span><label class="toggle-switch"><input type="checkbox"
+              id="themeToggle"><span class="toggle-slider"></span></label><span>Blue</span></div>
+      </div>
+    </div>
+  </div>
+  <main class="main-content">
+    <div class="title">Inventory Management</div>
+    <p class="demo-note"><i class="fa-solid fa-chart-pie"></i> Static admin analytics — switch between Downcity and
+      Harborside.</p>
+    <div class="box-container">
+      <div class="admin-left-column">
+        <div class="box top-box">
+          <div class="box-header">
+            <h2>Bar chart</h2>
+          </div>
+          <div class="box-content" style="height:90%">
+            <div class="tablewrapper-bar"><canvas id="generalBar"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-middle-left-column">
+        <div class="box top-box">
+          <div class="box-header">
+            <h2>Monitors</h2>
+          </div>
+          <div class="box-content">
+            <div class="tablewrapper-chart"><canvas id="monitorsPie"></canvas></div>
+          </div>
+        </div>
+        <div class="box bottom-box">
+          <div class="box-header">
+            <h2>Laptops</h2>
+          </div>
+          <div class="box-content">
+            <div class="tablewrapper-chart"><canvas id="laptopsPie"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-middle-right-column">
+        <div class="box top-box">
+          <div class="box-header">
+            <h2>Desktops</h2>
+          </div>
+          <div class="box-content">
+            <div class="tablewrapper-chart"><canvas id="desktopsPie"></canvas></div>
+          </div>
+        </div>
+        <div class="box bottom-box">
+          <div class="box-header">
+            <h2>Printers</h2>
+          </div>
+          <div class="box-content">
+            <div class="tablewrapper-chart"><canvas id="printersPie"></canvas></div>
+          </div>
+        </div>
+      </div>
+      <div class="admin-right-column">
+        <div class="box top-box">
+          <div class="box-header">
+            <h2>Total Quantity</h2><button id="export" class="action-btn"><i class="fa-solid fa-download"></i> Export to
+              CSV</button>
+          </div>
+          <div class="box-content">
+            <div class="tablewrapper-toner" style="height:700px">
+              <table id="allTable">
+                <thead>
+                  <tr>
+                    <th>Hardware Type</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-box-container">
+      <section class="tonerBottom-left">
+        <div class="table-header">
+          <h2>Last Used</h2>
+        </div>
+        <div class="box-content">
+          <div class="tablewrapper-admin">
+            <table id="lastTable">
+              <thead>
+                <tr>
+                  <th>Quantity</th>
+                  <th>Hardware Type</th>
+                  <th>Model Type</th>
+                  <th>Campus</th>
+                  <th>Staff</th>
+                  <th>Transfer Date</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+      <section class="tonerBottom-right">
+        <div class="table-header">
+          <h2>Open Equipment Counts</h2>
+        </div>
+        <div class="box-content">
+          <div class="tablewrapper-admin">
+            <table id="openTable">
+              <thead>
+                <tr>
+                  <th>Quantity</th>
+                  <th>Model Type</th>
+                  <th>Hardware Type</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <p>Inventory Management · Static Admin Demonstration</p>
+  </footer>
+  <script src="admin.js"></script>
+</body>
+
+</html>
