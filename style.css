@@ -678,3 +678,15 @@ footer .wordmark {
     transition: none;
   }
 }
+
+/* Additional featured project uses the existing project-card design. */
+.project-card + .project-card {
+  margin-top: 36px;
+}
+.scheduler-project .project-visual {
+  background: #f5f5f5;
+}
+.scheduler-project .project-visual img {
+  object-fit: contain;
+  object-position: center;
+}
