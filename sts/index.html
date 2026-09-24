@@ -2,6 +2,15 @@
 <html lang="en">
 
 <head>
+    <script>
+        // Some static servers serve /sts without redirecting to /sts/.
+        // Normalize before relative scripts, images, and links are resolved.
+        if (!location.pathname.endsWith('/') && !location.pathname.split('/').pop().includes('.')) {
+            const entryUrl = new URL(location.href);
+            entryUrl.pathname += '/';
+            history.replaceState(history.state, '', entryUrl.href);
+        }
+    </script>
     <meta http-equiv="Content-Security-Policy"
         content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
     <meta charset="UTF-8">

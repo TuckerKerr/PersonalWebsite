@@ -8,7 +8,7 @@
         if (!placeholder) return;
 
         try {
-            const response = await STSDemo.request('../../scheduler/partials/sidebar.html');
+            const response = await STSDemo.request(STSDemo.root + 'partials/sidebar.html');
             placeholder.outerHTML = await response.text();
         } catch (error) {
             console.error('Failed to load sidebar:', error);
@@ -23,3 +23,4 @@
         loadSidebar();
     }
 })();
+
