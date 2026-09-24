@@ -51,7 +51,7 @@
         const url = new URL(String(input), location.href), endpoint = url.pathname.split('/').pop(), q = url.searchParams, f = fields(options.body), action = q.get('action');
         if (url.origin !== new URL(root).origin) throw new Error('External requests are disabled in this demo.');
         if (endpoint === 'sidebar.html' || /^(intro|setup|FrontEnd|api|faq|GitDoc|GitGPG)\.(md|MD)$/.test(endpoint)) {
-            const target = endpoint === 'sidebar.html' ? new URL('partials/sidebar.html', root) : new URL('Docs/' + endpoint, root);
+            const target = endpoint === 'sidebar.html' ? new URL('../scheduler/partials/sidebar.html', root) : new URL('Docs/' + endpoint, root);
             return fetch(target, { credentials: 'omit' });
         }
         if (/^(FWSubmit|EqSubmit|EwSubmit|RcSubmit|DiSubmit|review)\.php$/.test(endpoint)) { record(endpoint, f); return ok(); }
@@ -142,7 +142,7 @@
                 session.setItem('demoRole', toggle.checked ? 'admin' : 'worker');
                 location.href = new URL(toggle.checked ? 'INDEX-HTML/admin.html' : 'INDEX-HTML/main.html', root);
             });
-            dropdown.append(mode);
+            if (!location.pathname.endsWith('/imagingdashboard.html')) dropdown.append(mode);
             const reset = document.createElement('button');
             reset.type = 'button'; reset.className = 'demo-reset'; reset.textContent = 'Reset demo data';
             reset.addEventListener('click', () => { session.removeItem('state'); location.reload(); });

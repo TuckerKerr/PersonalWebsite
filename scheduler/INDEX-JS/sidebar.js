@@ -2,13 +2,15 @@
 // Keep the existing sidebar as a fallback if the partial cannot be loaded.
 window.schedulerSidebarReady = (async function () {
     const scriptUrl = document.currentScript.src;
+    const partialUrl = new URL('../partials/sidebar.html', scriptUrl);
     try {
-        const response = await fetch(new URL('../partials/sidebar.html', scriptUrl));
+        const response = await fetch(partialUrl);
         if (!response.ok) throw new Error('Sidebar request failed: ' + response.status);
         const template = document.createElement('template');
         template.innerHTML = await response.text();
         const sidebar = template.content.querySelector('#sidebar');
         const overlay = template.content.querySelector('#overlay');
+        sidebar.querySelectorAll('a[href]').forEach(a => { a.href = new URL(a.getAttribute('href'), partialUrl).href; });
         if (!sidebar || !overlay) throw new Error('Sidebar partial is incomplete');
         const currentSidebar = document.getElementById('sidebar');
         const currentOverlay = document.getElementById('overlay');
