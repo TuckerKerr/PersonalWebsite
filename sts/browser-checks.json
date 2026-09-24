@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "page": "index.html",
+      "errors": []
+    },
+    {
+      "page": "INDEX-HTML/main.html",
+      "errors": []
+    },
+    {
+      "page": "INDEX-HTML/admin.html",
+      "errors": []
+    },
+    {
+      "page": "FORM-HTML/EQ-Drop.html",
+      "errors": []
+    },
+    {
+      "page": "FORM-HTML/Delivery-Intake.html",
+      "errors": []
+    },
+    {
+      "page": "FORM-HTML/E-Waste.html",
+      "errors": []
+    },
+    {
+      "page": "FORM-HTML/Field-Work.html",
+      "errors": []
+    },
+    {
+      "page": "FORM-HTML/Room-Check.html",
+      "errors": []
+    },
+    {
+      "page": "INDEX-HTML/Raw-Data.html",
+      "errors": []
+    },
+    {
+      "page": "PrinterCheck/Printer.html",
+      "errors": []
+    },
+    {
+      "page": "LAB-STATS/Lab-Stats.html",
+      "errors": []
+    },
+    {
+      "page": "imagingdashboard.html",
+      "errors": []
+    },
+    {
+      "page": "Docs/Docs.html",
+      "errors": []
+    },
+    {
+      "page": "INDEX-HTML/review.html",
+      "errors": []
+    },
+    {
+      "page": "INDEX-HTML/thankyou.html",
+      "errors": []
+    },
+    {
+      "page": "AVFramework/testDashboard.html",
+      "errors": []
+    }
+  ],
+  "passed": [
+    "Equipment return persists",
+    "All four delivery types persist",
+    "E-waste bin and submission",
+    "Room checklist and submission",
+    "Field work reaches admin approval",
+    "Announcements post, like, delete and escape markup",
+    "Demo user creation",
+    "Printer checks, campus switch and simulated full scan",
+    "Raw data pagination, filtering and CSV export",
+    "Global search opens the matching table",
+    "Lab groups and station details",
+    "Imaging search",
+    "Feedback star rating and confirmation",
+    "Theme persistence and mobile sidebar navigation"
+  ],
+  "interactionErrors": [],
+  "external": []
+}

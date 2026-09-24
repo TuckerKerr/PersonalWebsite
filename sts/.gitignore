@@ -1,0 +1,11 @@
+db*connect*
+pdo*connect*
+.env*
+*.php
+*.log
+*.key
+*.pem
+*.pfx
+*.bak
+Thumbs.db
+.DS_Store

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="referrer" content="no-referrer"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'"><script src="../demo/demo.js"></script><script src="../INDEX-JS/admin-session.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student IT Field Services</title>
+    <link rel="icon" type="image/x-icon" href="../ASSETS/favicon.ico">
+    <link rel="stylesheet" href="../vendor/fontawesome-6.0.0.css">
+    <link rel="stylesheet" href="../Styles.css">
+    
+</head>
+<style>
+    .box-container {
+        flex-direction: initial;
+        align-items: initial;
+        height: 100%;
+    }
+
+    /* Styles for larger screens - keep search bar visible */
+    @media (min-width: 769px) {
+        .phone-decorative-line {
+            display: none;
+            /* Ensure search bar is visible on larger screens */
+        }
+    }
+
+    /* Mobile-Specific Styles */
+    @media (max-width: 768px) {
+        .overlay {
+            position: fixed;
+            opacity: 70%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            z-index: 999;
+        }
+    }
+
+    body {
+        overflow-x: hidden;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        height: 100%;
+        transition: left 0.3s ease;
+        z-index: 1000;
+        overflow-y: hidden;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .topnav {
+        left: 60px;
+        width: calc(100% - 60px);
+    }
+
+
+    .main-content {
+        margin-top: 60px;
+        width: calc(100% - 60px);
+    }
+
+    .box-left-column,
+    .box-right-column,
+    .box-center-column {
+        width: 100%;
+    }
+
+    /* Responsive chart and box adjustments */
+    .box,
+    .chart-container {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Ensure chart containers are responsive */
+    canvas {
+        max-height: 300px;
+        width: auto !important;
+    }
+    #requestFeedCarousel {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.carousel-card {
+  box-sizing: border-box;
+  padding: 15px;
+
+  border-radius: 3px;
+  border: 1px solid var(--border-color);
+  opacity: 0;
+  transform: scale(0.97);
+  transition: all 0.5s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+}
+
+.carousel-card.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+  .difficulty-rating {
+    color: #f5b301;
+    font-size: 1.1rem;
+  }
+  .btn {
+    padding: 6px 14px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 3px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+  }
+
+  .btn.deny-btn {
+    background-color: #dc3545;
+  }
+
+  .btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+</style>
+
+<body >
+    <!-- Shared sidebar (see partials/sidebar.html) -->
+    <script src="../../scheduler/INDEX-JS/sidebar.js"></script>
+    <div id="sidebar-placeholder"></div>
+
+    <!-- Top Navigation Bar -->
+    <div class="topnav">
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search for assets, tickets, or users...">
+            <button data-emoji="✨" type="submit" class="submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <div class="profile" id="profile">
+            <div class="profile-icon" id="profileIcon">U</div>
+            <div class="dropdown" id="dropdown">
+                <div class="username">
+                    <h2 id="usernameDisplay"></h2>
+                </div>
+                <!-- Theme toggle switch -->
+                <div class="theme-toggle">
+                    <span>Dark Mode</span>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="themeToggle">
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+                <a href="../scheduler/index.html" class="dropdown-item">Schedule <i class="fa-solid fa-calendar-days" width="20" height="20"></i></a>
+                <a href="#" onclick="logout()" class="dropdown-item">Sign Out <i class="fa-solid fa-right-from-bracket" width="20" height="20"></i></a>
+                <a href="#" onclick="addUser()" class="dropdown-item">A/M User <i class="fa-solid fa-user" width="20" height="20"></i></a>
+            </div>
+        </div>
+    </div>
+
+<!-- Main Content Area -->
+<div class="main-content" id="mainContent">
+    <div class="box-container">
+        <div class="box-left-column">
+            <div class="box top-box">
+                <div class="box-header">
+                    <h2>Weekly Recap</h2>
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                <div class="box-content">
+                    <canvas id="weeklyRecapChart" width="200" height="250"></canvas>
+                </div>
+            </div>
+
+            <div class="box bottom-box-top" style="max-height: 200px;">
+                <div class="box-header" style="margin: 0; padding: 0;">
+                    <h2>End of Semester</h2>
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="box-content">
+                    <form id="semesterForm">
+                        <input type="date" id="endOfSemester" name="endOfSemester">
+                        <input type="submit" id="semesterButton" value="submit">
+                        <input type="button" class="submitButton" id="semesterUpdate" value="update" disabled>
+                    </form>
+                </div>      
+            </div>
+            
+            <!--THIS WILL BE CHANGED TO A DROPDOWN FOR -->
+            <div class="box bottom-box-bottom">
+                <div class="box-header" style="margin: 0; padding: 0;">
+                    <h2>EWaste Bins</h2>
+                    <select id="campusSelect" style="margin-left: 15px;">
+                        <option value="Harborside">Harborside</option>
+                        <option value="Down-City">Downcity</option>
+                    </select>
+
+                    <button onclick="printBins(event, document.getElementById('campusSelect').value)" id="print" class="submitButton" style="margin-left: 8px; margin-right: 15px; margin-top: 5px; margin-bottom: 5px;">Print Pages</button>
+                    <i class="fas fa-recycle"></i>
+                </div>
+                <div class="box-content">
+                    <form id="binForm">
+                            <select id="bin_num" name="bin_num">
+                                
+                            </select> 
+
+                            <input type="date" id="bin_start" name="bin_start">
+                        
+                        <input type="submit" id="binButton" value="submit">
+                        <input type="button" class="submitButton" id="binUpdate" value="update" disabled style="display: none;">
+                    </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="box-center-column">
+            <div class="box full-height-box">
+                <div class="box-header">
+                    <h2>Daily Tasks</h2>
+                    <i class="fas fa-user-chart"></i>
+                </div>
+                <div class="box-row">
+                    <div class="box-section">
+                        <div class="section-header">Printer's Checked Today</div>
+                        <div class="section-content">
+                            <canvas id="PrinterCheck"></canvas>
+                        </div>
+                    </div>
+                    <div class="box-section">
+                        <div class="section-header">Rooms Checked This Week</div> 
+                        <div class="section-content">
+                            <canvas id="roomChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box-right-column">
+            <div class="box full-height-box">
+                <div class="box-header">
+                    <h2>Announcements</h2>
+                    <i class="fas fa-user-chart"></i>
+                </div>
+                <div class="box-row">
+                    <div class="box-section" id="chat-container" style="height: 55vh;">
+                       
+                    </div>
+                    <div class="box-section">
+                        <form id="announcementForm">
+                            <input type="text" placeholder="Enter Subject Line" name="announcementSubject">
+                            <textarea type="text" style="height: 100px;" placeholder="Enter your announcement" name="announcementText"></textarea>
+                            <input type="submit" value="Post">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="popup" id="userPopup">
+            <div class="popup-content-input">
+                <div class="box-header">
+                    <h2>User Information</h2>
+                    <button class="close-popup" onclick="closeUser()"><i class="fa-solid fa-xmark"></i></button>
+
+                </div>
+                
+                <select id="usersType" onchange="changeUsers()">
+                    <option value="" disabled selected>Select what user you want to deal with</option>
+                    <option value="newUser">New User</option>
+                    <option value="existingUser">Modify Existing User</option>
+                </select> 
+
+                <form id="userForm" style="max-width: 100%;">
+                    <input type="radio" id="newUser" name="submitType" value="newUser" hidden checked>
+                    <input type="radio" id="oldUser" name="submitType" value="oldUser" hidden>
+
+
+                    <!--Selecting/Deciding the user-->
+                    <input type="text" placeholder="Users Name" id="usersName" name="usersName">
+                    <select id="existingUsers" name="existingUsers" style="display: none;">
+                        <option value="" disabled selected>Select User</option>
+                    </select>  
+
+                    <!--What campus the user is on-->
+                    <div style="display: flex; justify-content: space-evenly; align-items: stretch;">
+                        <span style="display: flex; align-items: baseline;">
+                            <input type="radio" id="downcityCampus" name="campusRadio" value="Downcity">
+                            <label for="downcityCampus"> Downcity</label>
+                        </span>
+                        
+                        <span style="display: flex; align-items: baseline;">
+                            <input type="radio" id="harborsideCampus" name="campusRadio" value="Harborside">
+                            <label for="harborsideCampus"> Harborside</label>
+                        </span>
+                    </div>
+                    
+
+                    <!--If the user is staff or student-->
+                    <span style="display: flex; justify-content: space-evenly; margin: 10px;">
+                        <input type="checkbox" id="staffAccount" name="accountRadio" value="Student">
+                        <label for="staffAccount">Staff</label>
+                    
+                    <!--Whether the user is active or not-->
+                        <input type="checkbox" id="activeUser" name="activeRadio" value="0">
+                        <label for="activeUser">Active</label>
+                    </span>
+
+                    <!--Maybe make all of these switches instead of radio buttons?-->
+
+                    <input type="submit" value="Submit">
+                    <input type="button" id="resetPasswordButton" value="Reset Password" style="display: none;">
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Include Chart.js -->
+<script src="../vendor/chart.umd.js"></script>
+<script src="../INDEX-JS/admin-charts.js"></script>
+    
+
+
+    <!-- Footer -->
+
+    <script src="../INDEX-JS/Wrapper.js"></script>
+    <script src='../vendor/js-confetti-0.12.0.js'></script>
+    <script src="../INDEX-JS/admin-dashboard.js"></script>
+</body>
+</html>
